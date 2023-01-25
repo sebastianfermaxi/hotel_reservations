@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres
+    environment:
+      DATABASE_HOST: db
+      POSTGRES_PASSWORD: secret-password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+  web:
+    container_name: node_app
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
